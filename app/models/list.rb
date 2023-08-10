@@ -3,5 +3,5 @@ class List < ApplicationRecord
   has_many :lists, through: :user_lists
   has_many :tasks
 
-  validates :name, uniqueness: { scope: :user}
+  # validates :name, uniqueness: { scope: :user, }
 end
