@@ -16,16 +16,6 @@ code {
     monospace;
 }
 
-nav {
-  background-color: bisque;
-  padding: 5px;
-  margin: 5px;
-  border: 1px solid;
-  border-radius: 5px;
-  text-align: left;
-  display:flow-root;
-}
-
 .float-right {
   float: right;
 }

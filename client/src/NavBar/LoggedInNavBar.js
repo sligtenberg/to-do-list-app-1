@@ -16,6 +16,18 @@ function LoggedInNavBar() {
 
   return (
     <nav>
+      <NavLink to='/home'>
+        <button>Home</button>
+      </NavLink>
+      <NavLink to='/lists'>
+        <button>Lists</button>
+      </NavLink>
+      <NavLink to='/new_list'>
+        <button>New List</button>
+      </NavLink>
+      <NavLink to='/lists'>
+        <button>Lists</button>
+      </NavLink>
       <NavLink to='/'>
         <button onClick={handleLogout} className='float-right'>Log Out</button>
       </NavLink>
