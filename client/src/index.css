@@ -17,11 +17,24 @@ code {
 }
 
 h3 {
-  margin: 2px;
+  margin: 4px;
+}
+
+nav {
+  background-color:antiquewhite;
+  padding: 3px;
+  border: 1px solid;
+  border-radius: 5px;
+  text-align: left;
+  display:flow-root;
 }
 
 .float-right {
   float: right;
+}
+
+.float-left {
+  float: left;
 }
 
 .list {
@@ -30,6 +43,14 @@ h3 {
   border: 1px solid;
   border-radius: 5px;
   background-color: antiquewhite;
+}
+
+.list button {
+  width: 15px;
+  height: 15px;
+  padding: 0px;
+  margin: 4px;
+  font-size: smaller;
 }
 
 .task {
