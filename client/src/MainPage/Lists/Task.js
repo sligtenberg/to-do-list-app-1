@@ -1,8 +1,8 @@
 function Task({ task }) {
   return (
-    <li>
-      {task.description}
-    </li>
+    <div className='task'>
+      <input type="checkbox"/>{task.description}
+    </div>
   );
 }
 

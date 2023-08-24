@@ -25,9 +25,6 @@ function LoggedInNavBar() {
       <NavLink to='/new_list'>
         <button>New List</button>
       </NavLink>
-      <NavLink to='/?'>
-        <button>?</button>
-      </NavLink>
       <NavLink to='/'>
         <button onClick={handleLogout} className='float-right'>Log Out</button>
       </NavLink>

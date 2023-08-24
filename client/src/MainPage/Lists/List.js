@@ -4,11 +4,9 @@ function List({ userList }) {
   const tasks = userList.list.tasks.map(task => <Task key={task.id} task={task}/>)
 
   return (
-    <div>
+    <div className='list'>
       <h3>{userList.list.name}</h3>
-      <ul>
-        {tasks}
-      </ul>
+      {tasks}
     </div>
   );
 }

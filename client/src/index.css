@@ -7,7 +7,7 @@ body {
   text-align: center;
   background-color: lightblue;
   font-size: small;
-  max-width: 708px;
+  width: 350px;
   margin: auto;
 }
 
@@ -16,6 +16,22 @@ code {
     monospace;
 }
 
+h3 {
+  margin: 2px;
+}
+
 .float-right {
   float: right;
+}
+
+.list {
+  margin: 5px 0px;
+  width: 100%;
+  border: 1px solid;
+  border-radius: 5px;
+  background-color: antiquewhite;
+}
+
+.task {
+  text-align: left;
 }

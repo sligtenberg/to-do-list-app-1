@@ -20,7 +20,7 @@ function App() {
       <h1>Collaborative</h1>
       <NavBarContainer />
       {user ? <MainPageContainer /> :  <>
-          <h3>Log in or sign up to vend!</h3>
+          <h3>Log in or sign up to collaborate!</h3>
           <button onClick={() => window.open('https://github.com/sligtenberg/to-do-list-app-1', "_blank", "noreferrer")}>
             Repo, readme, & instructions
           </button>
