@@ -8,12 +8,11 @@ function List({ userList }) {
 
   return (
     <div className='list'>
-      <button className='float-left' onClick={() => setExpand(!expand)}>
-        {expand ? '-' : '+' }
-      </button>
-      <button className='float-right'>x</button>
-      <h3>{userList.list.name}</h3>
-      {tasks}
+      <div >
+        <span onClick={() => setExpand(!expand)}>{userList.list.name}</span>
+        <span className='float-right'>X</span>
+      </div>
+      {expand ? tasks : null}
     </div>
   );
 }

@@ -4,20 +4,18 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   background-color: lightblue;
   font-size: small;
   width: 350px;
   margin: auto;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+h1 {
+  text-align: center;
 }
 
-h3 {
-  margin: 4px;
+button, span {
+  cursor: pointer;
 }
 
 nav {
@@ -25,34 +23,18 @@ nav {
   padding: 3px;
   border: 1px solid;
   border-radius: 5px;
-  text-align: left;
   display:flow-root;
+  margin: 5px;
 }
 
 .float-right {
   float: right;
 }
 
-.float-left {
-  float: left;
-}
-
 .list {
-  margin: 5px 0px;
-  width: 100%;
+  margin: 5px;
+  padding: 3px;
   border: 1px solid;
   border-radius: 5px;
-  background-color: antiquewhite;
-}
-
-.list button {
-  width: 15px;
-  height: 15px;
-  padding: 0px;
-  margin: 4px;
-  font-size: smaller;
-}
-
-.task {
-  text-align: left;
+  background-color: lightpink;
 }

@@ -1,6 +1,6 @@
 function Task({ task }) {
   return (
-    <div className='task'>
+    <div >
       <input type="checkbox"/>{task.description}
     </div>
   );
