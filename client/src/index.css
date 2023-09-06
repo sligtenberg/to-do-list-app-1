@@ -27,6 +27,10 @@ nav {
   margin: 5px;
 }
 
+.task-name {
+  font-weight: bold;
+}
+
 .float-right {
   float: right;
 }

@@ -7,7 +7,9 @@ function ListsContainer() {
   const userLists = user.user_lists.map(userList => <List key={userList.id} userList={userList}/>)
 
   return (
-    userLists
+    <div>
+      {userLists}
+    </div>
   );
 }
 
