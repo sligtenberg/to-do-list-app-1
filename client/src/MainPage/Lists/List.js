@@ -11,7 +11,7 @@ function List({ userList }) {
   // when expand is true, tasks are visible below the list
   const [expand, setExpand] = useState(false)
 
-  // newTask is the object which is sent to the backend when the user creates a new task
+  // newTask is the object which is sent to the backend when users create new tasks
   const [newTask, setNewTask] = useState({
     description: "",
     completed: false,
@@ -27,13 +27,11 @@ function List({ userList }) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newTask)
     }).then(rspns => {
-      if (rspns.ok) {
-        // update user state to reflect the new list on the frontend
+      if (rspns.ok) { // update user state to reflect the new list on the frontend
         rspns.json().then(newTask => setUser({...userList, user_lists: user.user_lists.map(userList => {
           return {...userList, list: {...userList.list, tasks: [...userList.list.tasks, newTask]}}
         })}))
-        // clear the form and reset the newTask object
-        setNewTask({
+        setNewTask({ // clear the form and reset the newTask object
           description: "",
           completed: false,
           list_id: userList.list.id
