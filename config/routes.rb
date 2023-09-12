@@ -18,4 +18,7 @@ Rails.application.routes.draw do
 
   # task routes
   resources :tasks, only: [:create, :update, :destroy]
+
+  # list routes
+  resources :lists, only: [:create, :destroy]
 end

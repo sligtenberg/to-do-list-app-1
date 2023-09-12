@@ -1,5 +1,4 @@
 class TasksController < ApplicationController
-  rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_inventory_response
 
   def create
     task = find_list.tasks.create!(task_params)
@@ -8,19 +7,17 @@ class TasksController < ApplicationController
 
   def update
     task = find_task
-    #debugger
     task.update!(task_params)
     render json: task
   end
 
   def destroy
-    find_task.delete
+    find_task.destroy
   end
 
   private
 
   # probably this is where the checks for owner, participant, read only should take place
-  # multiple find methods
   def find_task
     @current_user.tasks.find(params[:id])
   end
@@ -34,7 +31,4 @@ class TasksController < ApplicationController
     params.permit(:id, :description, :completed)
   end
 
-  def render_unprocessable_inventory_response(exception)
-    render json: { errors: exception.record.errors.full_messages }, status: :unprocessable_entity
-  end
 end

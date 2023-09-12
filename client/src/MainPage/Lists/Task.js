@@ -5,7 +5,7 @@ import Foco from 'react-foco';
 function Task({ task }) {
   const { user, setUser } = useContext(UserContext)
 
-  // when editTaskDescription is true, the task description becomes a form field that users can edit
+  // when editTaskDescription is true, task description becomes a form field that users can edit
   const [editTaskDescription, setEditTaskDescription] = useState(false)
   const [newDescription, setNewDescription] = useState(task.description)
 
@@ -18,18 +18,18 @@ function Task({ task }) {
   function handleDescriptionSubmit(e) {
     e.preventDefault()
     updateTask({...task, description: newDescription})
-    setEditTaskDescription(false) // clear the form and reset the newTask object
+    setEditTaskDescription(false) // clear form, reset newTask object
   }
 
   // updateTask sends newTask in a patch request to the backend
   function updateTask(newTask) {
-    // send a patch request to the backend with the updated task object
+    // send a patch request to the backend with updated task object
     fetch(`/tasks/${task.id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newTask)
     }).then(rspns => {
-      if (rspns.ok) { // update user state on the frontend
+      if (rspns.ok) { // update frontend user state
       rspns.json().then(updatedTask => setUser({...user, user_lists: user.user_lists.map(userList => {
           return {...userList, list: {...userList.list, tasks: userList.list.tasks
             .map(task => task.id === updatedTask.id ? updatedTask : task)}}
@@ -40,9 +40,9 @@ function Task({ task }) {
 
   // deleteTask is called when the user clicks the task delete button
   function deleteTask() {
-    // send a delete request with the task id to the backend 
+    // send delete request with task id to the backend 
     fetch(`/tasks/${task.id}`, {method: 'DELETE'}).then(rspns => {
-      if (rspns.ok) { // remove the task on from user state on the frontend
+      if (rspns.ok) { // remove task on from user frontend state
       setUser({...user, user_lists: user.user_lists.map(userList => {
           return {...userList, list: {...userList.list, tasks: userList.list.tasks
             .filter(tasK => tasK.id !== task.id)}}

@@ -1,8 +1,4 @@
 class UsersController < ApplicationController
-  # DEV ONLY:
-  # def index
-  #   render json: User.all, include: ['lists.tasks']
-  # end
 
   # don't need to be logged in to create a user
   skip_before_action :authorize, only: [:create]
@@ -25,4 +21,5 @@ class UsersController < ApplicationController
   def user_params
     params.permit(:username, :password)
   end
+  
 end
