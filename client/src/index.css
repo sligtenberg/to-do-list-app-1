@@ -43,7 +43,9 @@ nav {
   font-weight: bold;
 }
 
-
+.new-list-btn {
+  margin: 5px;
+}
 
 .modalDiv {
   position: fixed;

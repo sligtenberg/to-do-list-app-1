@@ -13,20 +13,19 @@ function LoggedInMain() {
         <Route path='/' element={
           <div>
             <ListsContainer />
-            <Link to='new_list' state={{ background: location }} >
-              <button>New List</button>
+            <Link to='/new_list' state={{ background: location }} >
+              <button className='new-list-btn'>Create New List</button>
             </Link>
             <Outlet />
           </div>} >
-          <Route path='new_list' element={<NewList />} />
+          <Route path='/new_list' element={<NewList />} />
         </Route>
         <Route path='/instructions' element={<Instructions />} />
-        {/* <Route exact path='/' element={<ListsContainer />} /> */}
         <Route path='*' element={<h1>404 not found</h1>} />
       </Routes>
       {background && (
         <Routes>
-          <Route path='new_list' element={<NewList />} />
+          <Route path='/new_list' element={<NewList />} />
         </Routes>
       )}
     </div>
