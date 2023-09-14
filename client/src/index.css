@@ -5,8 +5,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: lightblue;
+  max-width: 400px;
   font-size: small;
-  width: 350px;
   margin: auto;
 }
 
@@ -21,14 +21,10 @@ button, span {
 nav {
   background-color:antiquewhite;
   padding: 3px;
+  margin: 5px;
   border: 1px solid;
   border-radius: 5px;
-  display:flow-root;
-  margin: 5px;
-}
-
-.task-name {
-  font-weight: bold;
+  display: flow-root;
 }
 
 .float-right {
@@ -41,4 +37,30 @@ nav {
   border: 1px solid;
   border-radius: 5px;
   background-color: lightpink;
+}
+
+.task-name {
+  font-weight: bold;
+}
+
+
+
+.modalDiv {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
+
+}
+
+.modal {
+  background: lightblue;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 10px;
 }

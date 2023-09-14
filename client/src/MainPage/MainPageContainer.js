@@ -1,17 +1,13 @@
-import { Routes, Route } from 'react-router-dom';
-import ListsContainer from './Lists/ListsContainer';
-import Home from './Home';
-import NewList from './NewList';
+import { useContext } from 'react';
+import { UserContext } from '../Context/user';
+import LoggedInMain from './LoggedInMain';
+import LoggedOutMain from './LoggedOutMain';
 
 function MainPageContainer() {
+  const { user } = useContext(UserContext)
+
   return (
-    <Routes>
-      <Route path='/home' element={<Home />} />
-      <Route path='/lists' element={<ListsContainer />} />
-      <Route path='/new_list' element={<NewList />} />
-      <Route exact path='/' element={<Home />} />
-      <Route path='*' element={<h1>404 not found</h1>} />
-    </Routes>
+    user ? <LoggedInMain /> : <LoggedOutMain />
   );
 }
 

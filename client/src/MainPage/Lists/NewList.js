@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
-import { UserContext } from "../Context/user";
+import { UserContext } from "../../Context/user";
+import { useNavigate } from "react-router-dom";
 
 function NewList() {
   const [newList, setNewList] = useState({
@@ -7,6 +8,7 @@ function NewList() {
     tasks: [{description: 'blank', completed: false}]
   })
 
+  const navigate = useNavigate()
   const { user, setUser } = useContext(UserContext)
 
   // handleListSubmit is called when the new list form is submitted
@@ -27,17 +29,23 @@ function NewList() {
   }
 
   return (
-    <form onSubmit={handleListSubmit}>
-      <h3>Name:</h3>
-      <input
-        autoFocus
-        placeholder="name"
-        value={newList.name}
-        onChange={e => setNewList({...newList, name: e.target.value})}/>
-      {/* <h3>Tasks:</h3>
-      <input placeholder='task' value={newList.tasks[0]} onChange={e => setNewList({...newList, tasks: e.target.value})}/> */}
-      <input type='submit' value='create list'/>
-    </form>
+    <div className="modalDiv">
+      <div className="modal">
+        <form onSubmit={handleListSubmit}>
+          <h3>Name:</h3>
+          <input
+            autoFocus
+            placeholder="name"
+            value={newList.name}
+            onChange={e => setNewList({...newList, name: e.target.value})}/>
+          {/* <h3>Tasks:</h3>
+          <input placeholder='task' value={newList.tasks[0]} onChange={e => setNewList({...newList, tasks: e.target.value})}/> */}
+          <input type='submit' value='create list'/>
+        </form>
+        <button onClick={() => navigate(-1)}>Close</button>
+      </div>
+    </div>
+    
   );
 }
 
