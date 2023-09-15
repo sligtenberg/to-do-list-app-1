@@ -47,6 +47,11 @@ nav {
   margin: 5px;
 }
 
+.view-collaborators {
+  font-style: italic;
+  margin-left: 5px;
+}
+
 .modalDiv {
   position: fixed;
   top: 0;
@@ -57,7 +62,6 @@ nav {
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.7);
-
 }
 
 .modal {

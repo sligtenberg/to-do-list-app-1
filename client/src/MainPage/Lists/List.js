@@ -1,5 +1,6 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../Context/user';
+
 import Task from "./Task";
 
 function List({ userList }) {
@@ -10,7 +11,12 @@ function List({ userList }) {
 
   // when expand is true, tasks are visible below the list
   // would be nice to move this to cookies, so it persists accross refreshes
-  const [expand, setExpand] = useState(false)
+  const expandFromLocal = JSON.parse(localStorage.getItem(`expand${userList.id}`))
+  const [expand, setExpand] = useState(expandFromLocal)
+
+  useEffect(() => {
+    localStorage.setItem(`expand${userList.id}`, JSON.stringify(expand))
+  }, [expand])
 
   // newTask is the object which is sent to the backend when users create new tasks
   const [newTask, setNewTask] = useState({
@@ -56,6 +62,7 @@ function List({ userList }) {
     <div className='list'>
       <div>
         <span onClick={() => setExpand(!expand)} className='task-name'>{userList.list.name}</span>
+        {expand ? <span className='view-collaborators'>- view collaborators</span> : null}
         <span onClick={handleDeleteList} className='float-right'>X</span>
       </div>
       {expand ? 
