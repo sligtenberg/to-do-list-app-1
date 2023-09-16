@@ -3,13 +3,10 @@ import { UserContext } from "../../Context/user";
 import { useNavigate } from "react-router-dom";
 
 function NewListName() {
-  const [newListName, setNewListName] = useState('')
   const navigate = useNavigate()
-  const { user, setUser } = useContext(UserContext)
-
-  // close modal when clicking outside modal
   const modalRef = useRef()
-  const closeModal = e => e.target === modalRef.current ? navigate(-1) : null
+  const [newListName, setNewListName] = useState('')
+  const { user, setUser } = useContext(UserContext)
 
   // handleListSubmit is called when the new list form is submitted
   function handleListSubmit(e) {
@@ -27,7 +24,10 @@ function NewListName() {
   }
 
   return (
-    <div className="modalDiv" ref={modalRef} onClick={closeModal}>
+    <div
+      className="modalDiv"
+      ref={modalRef}
+      onClick={e => e.target === modalRef.current ? navigate(-1) : null}>
       <form onSubmit={handleListSubmit} className="modal">
         <h4>New List</h4>
         <input
@@ -38,7 +38,6 @@ function NewListName() {
         <input type='submit' value='create list'/>
       </form>
     </div>
-    
   );
 }
 

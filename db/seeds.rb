@@ -23,30 +23,30 @@ lists = List.create([
 ])
 
 user_list = UserList.create([
-  {user_id: users[0].id, list_id: lists[0].id , owner: true , participant: true},
-  {user_id: users[0].id, list_id: lists[1].id , owner: true , participant: true},
-  {user_id: users[0].id, list_id: lists[2].id , owner: true , participant: true},
-  {user_id: users[0].id, list_id: lists[3].id , owner: true , participant: true},
-  {user_id: users[0].id, list_id: lists[4].id , owner: true , participant: true},
-  {user_id: users[0].id, list_id: lists[5].id , owner: true , participant: true},
-  {user_id: users[0].id, list_id: lists[9].id , owner: false, participant: false},
-  {user_id: users[0].id, list_id: lists[10].id, owner: true , participant: true},
-  {user_id: users[0].id, list_id: lists[12].id, owner: false, participant: true},
-  {user_id: users[0].id, list_id: lists[14].id, owner: true , participant: true},
+  {user_id: users[0].id, list_id: lists[0].id , owner: true},
+  {user_id: users[0].id, list_id: lists[1].id , owner: true},
+  {user_id: users[0].id, list_id: lists[2].id , owner: true},
+  {user_id: users[0].id, list_id: lists[3].id , owner: true},
+  {user_id: users[0].id, list_id: lists[4].id , owner: true},
+  {user_id: users[0].id, list_id: lists[5].id , owner: true},
+  {user_id: users[0].id, list_id: lists[9].id , owner: false},
+  {user_id: users[0].id, list_id: lists[10].id, owner: true},
+  {user_id: users[0].id, list_id: lists[12].id, owner: false},
+  {user_id: users[0].id, list_id: lists[14].id, owner: true},
 
-  {user_id: users[1].id, list_id: lists[7].id , owner: true , participant: true},
-  {user_id: users[1].id, list_id: lists[8].id , owner: true , participant: true},
-  {user_id: users[1].id, list_id: lists[13].id, owner: true , participant: true},
-  {user_id: users[1].id, list_id: lists[14].id, owner: false, participant: false},
-  {user_id: users[1].id, list_id: lists[11].id, owner: true , participant: true},
+  {user_id: users[1].id, list_id: lists[7].id , owner: true},
+  {user_id: users[1].id, list_id: lists[8].id , owner: true},
+  {user_id: users[1].id, list_id: lists[13].id, owner: true},
+  {user_id: users[1].id, list_id: lists[14].id, owner: false},
+  {user_id: users[1].id, list_id: lists[11].id, owner: true},
 
-  {user_id: users[2].id, list_id: lists[0].id , owner: true , participant: true},
-  {user_id: users[2].id, list_id: lists[6].id , owner: true , participant: true},
-  {user_id: users[2].id, list_id: lists[9].id , owner: true , participant: true},
-  {user_id: users[2].id, list_id: lists[1].id , owner: false, participant: true},
-  {user_id: users[2].id, list_id: lists[10].id, owner: false, participant: true},
-  {user_id: users[2].id, list_id: lists[12].id, owner: true , participant: true},
-  {user_id: users[2].id, list_id: lists[14].id, owner: false, participant: false}
+  {user_id: users[2].id, list_id: lists[0].id , owner: true},
+  {user_id: users[2].id, list_id: lists[6].id , owner: true},
+  {user_id: users[2].id, list_id: lists[9].id , owner: true},
+  {user_id: users[2].id, list_id: lists[1].id , owner: false},
+  {user_id: users[2].id, list_id: lists[10].id, owner: false},
+  {user_id: users[2].id, list_id: lists[12].id, owner: true},
+  {user_id: users[2].id, list_id: lists[14].id, owner: false}
 ])
 
 tasks = Task.create([

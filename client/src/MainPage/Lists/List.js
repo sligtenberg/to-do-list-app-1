@@ -1,22 +1,24 @@
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../Context/user';
-
 import Task from "./Task";
+import Collaboratores from './Collaborators';
 
 function List({ userList }) {
+
   const tasks = userList.list.tasks
     .sort((a, b) => a.id - b.id)
     .map(task => <Task key={task.id} task={task}/>)
   const { user, setUser } = useContext(UserContext)
 
   // when expand is true, tasks are visible below the list
-  // would be nice to move this to cookies, so it persists accross refreshes
-  const expandFromLocal = JSON.parse(localStorage.getItem(`expand${userList.id}`))
-  const [expand, setExpand] = useState(expandFromLocal)
+  const [expand, setExpand] = useState(JSON.parse(localStorage.getItem(`expand${userList.id}`)))
 
+  // save the expand information locally to preserve expanded lists accross refreshes
   useEffect(() => {
     localStorage.setItem(`expand${userList.id}`, JSON.stringify(expand))
-  }, [expand])
+  }, [expand, userList.id])
+
+  const [showCollaborators, setShowCollaborators] = useState(false)
 
   // newTask is the object which is sent to the backend when users create new tasks
   const [newTask, setNewTask] = useState({
@@ -37,7 +39,6 @@ function List({ userList }) {
         rspns.json().then(newTask => setUser({...user, user_lists: user.user_lists.map(userList => {
           return {...userList, list: {...userList.list, tasks: [...userList.list.tasks, newTask]}}
         })}))
-        console.log(user)
         setNewTask({ // clear form, reset newTask object
           description: "",
           completed: false,
@@ -49,7 +50,6 @@ function List({ userList }) {
 
   // handleDeleteList is called when the delete list button is clicked
   function handleDeleteList() {
-    console.log('delete list clicked')
     // send a delete request with the list id to the backend 
     fetch(`/lists/${userList.list.id}`, {method: 'DELETE'}).then(rspns => {
       if (rspns.ok) { // remove the list from frontend state
@@ -62,7 +62,7 @@ function List({ userList }) {
     <div className='list'>
       <div>
         <span onClick={() => setExpand(!expand)} className='task-name'>{userList.list.name}</span>
-        {expand ? <span className='view-collaborators'>- view collaborators</span> : null}
+        {expand ? <span onClick={() => setShowCollaborators(true)}>- collaborators</span> : null}
         <span onClick={handleDeleteList} className='float-right'>X</span>
       </div>
       {expand ? 
@@ -77,6 +77,11 @@ function List({ userList }) {
             <input type='submit' className='float-right' value='create task'/>
           </form>
         </div> : null}
+        {showCollaborators ? 
+          <Collaboratores
+            setShowCollaborators={setShowCollaborators}
+            userLists={userList.list.user_lists}/>
+          : null}
     </div>
   );
 }
