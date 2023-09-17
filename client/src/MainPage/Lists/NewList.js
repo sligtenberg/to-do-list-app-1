@@ -35,7 +35,7 @@ function NewListName() {
           placeholder="name"
           value={newListName.name}
           onChange={e => setNewListName(e.target.value)}/>
-        <input type='submit' value='create list'/>
+        <input type='submit' value='create list' className='float-right'/>
       </form>
     </div>
   );

@@ -62,7 +62,7 @@ function List({ userList }) {
     <div className='list'>
       <div>
         <span onClick={() => setExpand(!expand)} className='task-name'>{userList.list.name}</span>
-        {expand ? <span onClick={() => setShowCollaborators(true)}>- collaborators</span> : null}
+        {expand ? <span onClick={() => setShowCollaborators(true)} > - collaborators</span> : null}
         <span onClick={handleDeleteList} className='float-right'>X</span>
       </div>
       {expand ? 
