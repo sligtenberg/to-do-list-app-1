@@ -6,9 +6,7 @@ import LoggedOutMain from './LoggedOutMain';
 function MainPageContainer() {
   const { user } = useContext(UserContext)
 
-  return (
-    user ? <LoggedInMain /> : <LoggedOutMain />
-  );
+  return user ? <LoggedInMain /> : <LoggedOutMain />;
 }
 
 export default MainPageContainer;

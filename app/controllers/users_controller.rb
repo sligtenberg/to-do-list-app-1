@@ -7,12 +7,12 @@ class UsersController < ApplicationController
   def create
     user = User.create!(user_params)
     session[:user_id] = user.id
-    render json: user, include: ['user_lists', 'user_lists.list', 'user_lists.list.tasks', 'user_lists.list.user_lists', 'user_lists.list.user_lists.user'], status: :created
+    render json: user, include: ['user_lists.list.tasks', 'user_lists.list.user_lists.user'], status: :created
   end
 
   # automatically log in if the user has a session
   def show
-    render json: @current_user, include: ['user_lists', 'user_lists.list', 'user_lists.list.tasks', 'user_lists.list.user_lists', 'user_lists.list.user_lists.user']
+    render json: @current_user, include: ['user_lists.list.tasks', 'user_lists.list.user_lists.user']
   end
 
   private

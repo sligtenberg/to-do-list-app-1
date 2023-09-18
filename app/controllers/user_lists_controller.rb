@@ -8,7 +8,7 @@ class UserListsController < ApplicationController
   def update
     user_list = find_user_list
     user_list.update!(user_list_update_params)
-    render json: user_list, include: ['list', 'list.tasks', 'list.user_lists', 'list.user_lists.user']
+    render json: user_list, include: ['list.tasks', 'list.user_lists.user']
   end
 
   def destroy

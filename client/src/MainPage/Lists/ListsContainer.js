@@ -6,9 +6,7 @@ function ListsContainer() {
   const { user } = useContext(UserContext)
   const userLists = user.user_lists.map(userList => <List key={userList.id} userList={userList}/>)
 
-  return (
-      userLists
-  );
+  return userLists;
 }
 
 export default ListsContainer;

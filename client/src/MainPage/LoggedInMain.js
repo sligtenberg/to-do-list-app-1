@@ -8,7 +8,7 @@ function LoggedInMain() {
   const background = location.state && location.state.background
 
   return (
-    <>
+    <div>
       <Routes location={background || location}>
         <Route path='/' element={
           <div>
@@ -28,7 +28,7 @@ function LoggedInMain() {
           <Route path='/new_list' element={<NewList />} />
         </Routes>
       )}
-    </>
+    </div>
   );
 }
 

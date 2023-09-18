@@ -6,9 +6,7 @@ import LoggedOutNavBar from './LoggedOutNavBar';
 function NavBarContainer() {
   const { user } = useContext(UserContext)
 
-  return (
-    user ? <LoggedInNavBar /> : <LoggedOutNavBar />
-  );
+  return user ? <LoggedInNavBar /> : <LoggedOutNavBar />;
 }
 
 export default NavBarContainer;

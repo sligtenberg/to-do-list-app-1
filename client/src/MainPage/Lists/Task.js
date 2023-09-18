@@ -8,6 +8,7 @@ function Task({ task }) {
   // when editTaskDescription is true, task description becomes a form field that users can edit
   const [editTaskDescription, setEditTaskDescription] = useState(false)
   const [newDescription, setNewDescription] = useState(task.description)
+  const handleNewDescriptionType = e => setNewDescription(e.target.value)
 
   // handleCheckboxClick is called when a task's checkbox is clicked
   const handleCheckboxClick = () => updateTask({...task, completed: !task.completed})
@@ -45,7 +46,7 @@ function Task({ task }) {
     editTaskDescription ?
       <form onSubmit={handleDescriptionSubmit}>
         <Foco onClickOutside={() => setEditTaskDescription(false)}>
-          <input value={newDescription} autoFocus onChange={e => setNewDescription(e.target.value)}/>
+          <input autoFocus value={newDescription} onChange={handleNewDescriptionType}/>
           <input type='submit' className="float-right" value={'sumbit'}/>
         </Foco>
       </form> :

@@ -3,7 +3,7 @@ class ListsController < ApplicationController
   def create
     new_list = List.create!(list_params)
     new_user_list = @current_user.user_lists.create!(list: new_list, owner: true)
-    render json: new_user_list, include: ['list.tasks', 'list.user_lists', 'list.user_list.user.username'], status: :created
+    render json: new_user_list, include: ['list.tasks', 'list.user_lists.user'], status: :created
   end
 
   # def update
