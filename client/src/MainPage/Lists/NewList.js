@@ -6,7 +6,7 @@ function NewListName() {
   const navigate = useNavigate()
   const modalRef = useRef()
   const [newListName, setNewListName] = useState('')
-  const { user, setUser } = useContext(UserContext)
+  const { addNewUserList } = useContext(UserContext)
 
   // handleListSubmit is called when the new list form is submitted
   function handleListSubmit(e) {
@@ -16,9 +16,9 @@ function NewListName() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({name: newListName})
     }).then(rspns => {
-      if (rspns.ok) { // update user state to reflect the new list on the frontend
-        rspns.json().then(newUserList => setUser({...user, user_lists: [...user.user_lists, newUserList]}))
-        navigate(-1)
+      if (rspns.ok) {
+        rspns.json().then(addNewUserList) // update user state to reflect the new list on the frontend
+        navigate(-1) // close the modal and navigate back to the lists page
       } else rspns.json().then(rspns => alert(rspns.errors))
     })
   }

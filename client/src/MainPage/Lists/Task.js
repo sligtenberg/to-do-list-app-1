@@ -3,16 +3,14 @@ import { UserContext } from "../../Context/user";
 import Foco from 'react-foco';
 
 function Task({ task }) {
-  const { user, setUser } = useContext(UserContext)
+  const { updateTaskInState, removeTaskFromState } = useContext(UserContext)
 
   // when editTaskDescription is true, task description becomes a form field that users can edit
   const [editTaskDescription, setEditTaskDescription] = useState(false)
   const [newDescription, setNewDescription] = useState(task.description)
 
   // handleCheckboxClick is called when a task's checkbox is clicked
-  function handleCheckboxClick() {
-    updateTask({...task, completed: !task.completed})
-  }
+  const handleCheckboxClick = () => updateTask({...task, completed: !task.completed})
 
   // handleDescriptionSubmit is called when a task's submit button is clicked
   function handleDescriptionSubmit(e) {
@@ -29,12 +27,8 @@ function Task({ task }) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newTask)
     }).then(rspns => {
-      if (rspns.ok) { // update frontend user state
-      rspns.json().then(updatedTask => setUser({...user, user_lists: user.user_lists.map(userList => {
-          return {...userList, list: {...userList.list, tasks: userList.list.tasks
-            .map(task => task.id === updatedTask.id ? updatedTask : task)}}
-        })})
-      )} else rspns.json().then(rspns => alert(rspns.errors))
+      if (rspns.ok) rspns.json().then(updateTaskInState) // update frontend user state
+      else rspns.json().then(rspns => alert(rspns.errors))
     })
   }
 
@@ -42,12 +36,8 @@ function Task({ task }) {
   function deleteTask() {
     // send delete request with task id to the backend 
     fetch(`/tasks/${task.id}`, {method: 'DELETE'}).then(rspns => {
-      if (rspns.ok) { // remove task on from user frontend state
-      setUser({...user, user_lists: user.user_lists.map(userList => {
-          return {...userList, list: {...userList.list, tasks: userList.list.tasks
-            .filter(tasK => tasK.id !== task.id)}}
-        })})
-      } else alert('something went wrong') // rspns.json().then(console.log)
+      if (rspns.ok) removeTaskFromState(task.id) // remove task on from user frontend state  
+      else alert('something went wrong') // rspns.json().then(console.log)
     })
   }
 

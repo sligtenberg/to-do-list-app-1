@@ -23,5 +23,5 @@ Rails.application.routes.draw do
   resources :lists, only: [:create, :destroy]
 
   # user_list routes
-  resources :user_lists, only: [:update]
+  resources :user_lists, only: [:update, :create, :destroy]
 end
