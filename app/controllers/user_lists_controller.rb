@@ -1,6 +1,7 @@
 class UserListsController < ApplicationController
 
   def create
+    debugger
     user_list = UserList.create!(user: find_user, list: find_list, owner: user_list_create_params[:owner])
     render json: user_list, status: :created
   end
@@ -8,7 +9,7 @@ class UserListsController < ApplicationController
   def update
     user_list = find_user_list
     user_list.update!(user_list_update_params)
-    render json: user_list, include: ['list.tasks', 'list.user_lists.user']
+    render json: user_list, status: :created
   end
 
   def destroy

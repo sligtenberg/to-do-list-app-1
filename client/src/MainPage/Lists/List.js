@@ -10,6 +10,7 @@ function List({ userList }) {
     .sort((a, b) => a.id - b.id)
     .map(task => <Task key={task.id} task={task}/>)
 
+  // should the following be a task component?
   const blankTask = {
     description: "",
     completed: false,

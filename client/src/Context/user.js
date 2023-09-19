@@ -10,6 +10,12 @@ function UserProvider({ children }) {
     setUser({...user, user_lists: [...user.user_lists, newUserList]})
   }
 
+  function addNewCollaborator(newCollaborator) {
+    setUser({...user, user_lists: user.user_lists.map(userList => {
+      return {...userList, list: {...userList.list, user_lists: [...userList.list.user_lists, newCollaborator]}}
+    })})
+  }
+
   // called in List.js
   function addNewTaskToList(newTask) {
     setUser({...user, user_lists: user.user_lists.map(userList => {
@@ -30,12 +36,27 @@ function UserProvider({ children }) {
     })})
   }
 
+  // called in Task.js
   function removeTaskFromState(taskId) {
     setUser({...user, user_lists: user.user_lists.map(userList => {
       return {...userList, list: {...userList.list, tasks: userList.list.tasks
         .filter(task => task.id !== taskId)}}
     })})
   }
+
+  function updateUserList(updatedUserList) {
+    setUser({...user, user_lists: user.user_lists.map(userList => {
+      return {...userList, list: {...userList.list, user_lists: userList.list.user_lists
+        .map(userList => userList.id === updatedUserList.id ? updatedUserList : userList)}}
+    })})
+  }
+
+function deleteCollaborator(collaboratorId) {
+  setUser({...user, user_lists: user.user_lists.map(userList => {
+    return {...userList, list: {...userList.list, user_lists: userList.list.user_lists
+      .filter(userList => userList.id !== collaboratorId)}}
+  })})
+}
 
   return (
     <UserContext.Provider value={{
@@ -45,7 +66,10 @@ function UserProvider({ children }) {
       addNewTaskToList,
       deleteUserList,
       updateTaskInState,
-      removeTaskFromState }}>
+      removeTaskFromState,
+      addNewCollaborator,
+      updateUserList,
+      deleteCollaborator }}>
       {children}
     </UserContext.Provider>
   );
