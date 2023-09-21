@@ -1,8 +1,7 @@
-import Collaboratores from "./Collaborators";
 import ListHeader from "./ListHeader";
 import UnownedTask from "./UnownedTask";
 
-function UnownedList({ list, expand, setExpand, showCollaborators, setShowCollaborators }) {
+function UnownedList({ list, expand, setExpand }) {
   const tasks = list.tasks
   .sort((a, b) => a.id - b.id)
   .map(task => <UnownedTask key={task.id} task={task} />)
@@ -12,15 +11,8 @@ function UnownedList({ list, expand, setExpand, showCollaborators, setShowCollab
       <ListHeader 
         setExpand={setExpand}
         expand={expand}
-        listName={list.name}
-        setShowCollaborators={setShowCollaborators}/>
+        list={list}/>
       {expand ? tasks : null}
-      {showCollaborators ? 
-          <Collaboratores
-            setShowCollaborators={setShowCollaborators}
-            userLists={list.user_lists}
-            list={list}/>
-          : null}
     </div>
   );
 }

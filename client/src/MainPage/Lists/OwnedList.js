@@ -1,10 +1,9 @@
 import { useContext, useState } from 'react';
 import { UserContext } from '../../Context/user';
 import OwnedTask from "./OwnedTask";
-import Collaboratores from './Collaborators';
 import ListHeader from './ListHeader';
 
-function OwnedList({ list, expand, setExpand, handleXClick, showCollaborators, setShowCollaborators }) {
+function OwnedList({ list, expand, setExpand, handleXClick }) {
   const { addNewTaskToList } = useContext(UserContext)
 
   const tasks = list.tasks
@@ -42,8 +41,7 @@ function OwnedList({ list, expand, setExpand, handleXClick, showCollaborators, s
       <ListHeader
         setExpand={setExpand}
         expand={expand}
-        listName={list.name}
-        setShowCollaborators={setShowCollaborators}
+        list={list}
         handleXClick={handleXClick}/>
       {expand ? 
         <div>
@@ -57,12 +55,6 @@ function OwnedList({ list, expand, setExpand, handleXClick, showCollaborators, s
             <input type='submit' className='float-right' value='create task'/>
           </form>
         </div> : null}
-        {showCollaborators ? 
-          <Collaboratores
-            setShowCollaborators={setShowCollaborators}
-            userLists={list.user_lists}
-            list={list}/>
-          : null}
     </div>
   );
 }

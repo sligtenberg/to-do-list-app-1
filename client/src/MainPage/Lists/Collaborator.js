@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { UserContext } from "../../Context/user";
 
-function Collaborator({ collaborator }) {
+function Collaborator({ collaborator, ownedByCurrentUser }) {
   const { deleteCollaborator, updateUserList } = useContext(UserContext)
 
   function handleCheckboxClick() {
@@ -25,9 +25,9 @@ function Collaborator({ collaborator }) {
 
   return (
     <tr>
-      <td><input type='checkbox' checked={collaborator.owner} onChange={handleCheckboxClick}/></td>
+      <td><input type='checkbox' disabled={!ownedByCurrentUser} checked={collaborator.owner} onChange={handleCheckboxClick}/></td>
       <td>{collaborator.user.username}</td>
-      <td><button type='button' onClick={deleteUserList}>remove</button></td>
+      {ownedByCurrentUser ? <td><button type='button' onClick={deleteUserList}>remove</button></td> : null }
     </tr>
   );
 }

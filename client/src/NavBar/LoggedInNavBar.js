@@ -1,9 +1,10 @@
 import { useContext } from 'react';
 import { UserContext } from '../Context/user';
-import { NavLink } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 function LoggedInNavBar() {
   const { setUser } = useContext(UserContext)
+  const navigate = useNavigate()
 
   // delete user's session 
   function handleLogout() {
@@ -16,15 +17,12 @@ function LoggedInNavBar() {
 
   return (
     <nav>
-      <NavLink to='/'>
-        <button>Lists</button>
-      </NavLink>
-      <NavLink to='/instructions'>
-        <button >Instructions</button>
-      </NavLink>
-      <NavLink to='/'>
-        <button onClick={handleLogout} className='float-right'>Log Out</button>
-      </NavLink>
+      <button onClick={() => navigate('/')}>Lists</button>
+      <button onClick={() => navigate('/instructions')}>Instructions</button>
+      <button className='float-right' onClick={() => {
+        navigate('/')
+        handleLogout()
+      }}>Log Out</button>
     </nav>
   );
 }
