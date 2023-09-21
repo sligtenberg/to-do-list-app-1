@@ -6,7 +6,7 @@ function ListHeader({ setExpand, expand, list, handleXClick }) {
 
   return (
     <div>
-      <span onClick={() => setExpand(!expand)} className='task-name hover-pointer'>{list.name}</span>
+      <span onClick={() => setExpand(!expand)} className='task-name hover-pointer'>{list.name} </span>
       {expand ?
         <span
             onClick={() => navigate(`/collaborators/${list.id}`)}

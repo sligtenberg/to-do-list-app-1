@@ -18,7 +18,7 @@ h4 {
   font-style: italic;
 }
 
-.hover-pointer, button, input[type=submit], input[type=checkbox] {
+.hover-pointer, button, input[type=submit], input[type=checkbox]:not([disabled]) {
   cursor: pointer;
 }
 

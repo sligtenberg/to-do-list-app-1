@@ -1,7 +1,7 @@
 import { useContext, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../Context/user";
-import Collaborator from "../Lists/Collaborator";
+import Collaborator from "./Collaborator";
 
 function CollaboratorsContainer() {
   const navigate = useNavigate()
@@ -50,6 +50,7 @@ function CollaboratorsContainer() {
       <div className='modal'>
         <h4>{userList.list.name} collaborators</h4>
         <form onSubmit={createNewCollaborator}><table><tbody>
+          <tr><td>owner</td></tr>
           {collaborators}
           {userList.owner ? <tr>
             <td><input
@@ -65,6 +66,7 @@ function CollaboratorsContainer() {
               value={newCollaborator.username}
               onChange={newCollaboratorUsernameChange}
               /></td>
+            <td><input type='submit' value='add collaborator'/></td>
           </tr> : null}
         </tbody></table></form>
       </div>
