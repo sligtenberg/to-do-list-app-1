@@ -2,7 +2,7 @@ import { useContext, useRef, useState } from "react";
 import { UserContext } from "../../Context/user";
 import { useNavigate } from "react-router-dom";
 
-function NewListName() {
+function NewList() {
   const navigate = useNavigate()
   const modalRef = useRef()
   const [newListName, setNewListName] = useState('')
@@ -41,4 +41,4 @@ function NewListName() {
   );
 }
 
-export default NewListName;
+export default NewList;

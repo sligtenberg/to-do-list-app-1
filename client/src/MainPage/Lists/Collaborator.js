@@ -2,7 +2,6 @@ import { useContext } from "react";
 import { UserContext } from "../../Context/user";
 
 function Collaborator({ collaborator }) {
-  console.log(collaborator)
   const { deleteCollaborator, updateUserList } = useContext(UserContext)
 
   function handleCheckboxClick() {

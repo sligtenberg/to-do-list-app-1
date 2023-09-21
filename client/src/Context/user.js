@@ -10,6 +10,7 @@ function UserProvider({ children }) {
     setUser({...user, user_lists: [...user.user_lists, newUserList]})
   }
 
+  // called in Collaborators.js
   function addNewCollaborator(newCollaborator) {
     setUser({...user, user_lists: user.user_lists.map(userList => {
       return {...userList, list: {...userList.list, user_lists: [...userList.list.user_lists, newCollaborator]}}
@@ -17,9 +18,11 @@ function UserProvider({ children }) {
   }
 
   // called in List.js
-  function addNewTaskToList(newTask) {
+  function addNewTaskToList(newTask, listId) {
     setUser({...user, user_lists: user.user_lists.map(userList => {
-      return {...userList, list: {...userList.list, tasks: [...userList.list.tasks, newTask]}}
+      return {...userList, list: userList.list.id === listId ?
+        {...userList.list, tasks: [...userList.list.tasks, newTask]} :
+        userList.list}
     })})
   }
 

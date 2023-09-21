@@ -29,7 +29,6 @@ function Collaboratores({ setShowCollaborators, userLists, list }) {
 
   function createNewCollaborator(e) {
     e.preventDefault()
-    console.log('before fetch', newCollaborator)
     fetch('/user_lists', { // send the newCollaborator object in a post request to the server
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

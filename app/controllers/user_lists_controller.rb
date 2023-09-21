@@ -1,48 +1,47 @@
 class UserListsController < ApplicationController
 
   def create
-    debugger
-    user_list = UserList.create!(user: find_user, list: find_list, owner: user_list_create_params[:owner])
-    render json: user_list, status: :created
+    list = find_owned_list(user_list_params[:list_id].to_i)
+    if list
+      user_list = UserList.create!(user: find_user, list: list, owner: user_list_params[:owner])
+      render json: user_list, status: :created
+    else
+      render_non_ownership_message
+    end
   end
 
   def update
-    user_list = find_user_list
-    user_list.update!(user_list_update_params)
-    render json: user_list, status: :created
+    user_list = find_owned_user_list
+    if user_list
+      user_list.update!(user_list_params)
+      render json: user_list, status: :created
+    else
+      render_non_ownership_message
+    end
   end
 
   def destroy
-    find_user_list.destroy
+    user_list = find_owned_user_list
+    if user_list
+      user_list.destroy
+    else
+      render_non_ownership_message
+    end
   end
 
   private
 
-  # probably this is where the checks for owner, participant, read only should take place
-  # current_user => lists => user_list
-  def find_user_list
-    UserList.find(user_list_update_params[:id])
-  end
-
   def find_user
-    User.find_by(username: user_list_create_params[:username])
+    User.find_by(username: user_list_params[:username])
   end
 
-  def find_list
-    List.find(user_list_create_params[:list_id])
+  def find_owned_user_list
+    @owned_lists.map { |list| list.user_lists } .flatten.find { |user_list| user_list.id == user_list_params[:id].to_i }
   end
 
   # strong params
-  def user_list_update_params
-    params.permit(:id, :owner)
-  end
-
-  def user_list_delete_params
-    params.permit(:id)
-  end
-
-  def user_list_create_params
-    params.permit(:username, :list_id, :owner)
+  def user_list_params
+    params.permit(:id, :username, :list_id, :owner)
   end
 
 end

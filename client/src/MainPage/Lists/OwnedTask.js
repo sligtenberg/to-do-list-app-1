@@ -1,14 +1,19 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../Context/user";
 import Foco from 'react-foco';
 
-function Task({ task }) {
+function UnownedTask({ task }) {
   const { updateTaskInState, removeTaskFromState } = useContext(UserContext)
 
   // when editTaskDescription is true, task description becomes a form field that users can edit
   const [editTaskDescription, setEditTaskDescription] = useState(false)
   const [newDescription, setNewDescription] = useState(task.description)
   const handleNewDescriptionType = e => setNewDescription(e.target.value)
+
+  function closeFoco() {
+    setEditTaskDescription(false)
+    setNewDescription(task.description)
+  }
 
   // handleCheckboxClick is called when a task's checkbox is clicked
   const handleCheckboxClick = () => updateTask({...task, completed: !task.completed})
@@ -38,24 +43,24 @@ function Task({ task }) {
     // send delete request with task id to the backend 
     fetch(`/tasks/${task.id}`, {method: 'DELETE'}).then(rspns => {
       if (rspns.ok) removeTaskFromState(task.id) // remove task on from user frontend state  
-      else alert('something went wrong') // rspns.json().then(console.log)
+      else rspns.json().then(rspns => alert(rspns.errors))
     })
   }
 
   return (
     editTaskDescription ?
       <form onSubmit={handleDescriptionSubmit}>
-        <Foco onClickOutside={() => setEditTaskDescription(false)}>
+        <Foco onClickOutside={closeFoco}>
           <input autoFocus value={newDescription} onChange={handleNewDescriptionType}/>
           <input type='submit' className="float-right" value={'sumbit'}/>
         </Foco>
       </form> :
       <div>
         <input type="checkbox" checked={task.completed} onChange={handleCheckboxClick}/>
-        <span onClick={() => setEditTaskDescription(true)}>{newDescription}</span>
-        <span className="float-right" onClick={deleteTask}>x</span>
+        <span className='hover-pointer' onClick={() => setEditTaskDescription(true)}>{newDescription}</span>
+        <span className="float-right hover-pointer" onClick={deleteTask}>x</span>
       </div>
   );
 }
 
-export default Task;
+export default UnownedTask;
