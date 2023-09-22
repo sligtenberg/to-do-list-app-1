@@ -1,10 +1,11 @@
 import ListHeader from "./ListHeader";
 import UnownedTask from "./UnownedTask";
+import OwnedTask from "./OwnedTask.js";
 
 function UnownedList({ list, expand, setExpand }) {
   const tasks = list.tasks
   .sort((a, b) => a.id - b.id)
-  .map(task => <UnownedTask key={task.id} task={task} />)
+  .map(task => <OwnedTask key={task.id} task={task} />)
 
   return (
     <div className='list'>

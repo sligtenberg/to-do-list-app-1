@@ -1,5 +1,9 @@
 class ListsController < ApplicationController
 
+  before_action only: :destroy do
+    list_authorization(list_params[:id].to_i)
+  end
+
   def create
     new_list = List.create!(list_params)
     new_user_list = @current_user.user_lists.create!(list: new_list, owner: true)
@@ -7,12 +11,7 @@ class ListsController < ApplicationController
   end
 
   def destroy
-    list = find_owned_list(list_params[:id].to_i)
-    if list
-      list.destroy
-    else
-      render_non_ownership_message
-    end
+    @owned_list.destroy
   end
 
   private

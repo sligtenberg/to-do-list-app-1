@@ -8,7 +8,7 @@ function Instructions() {
         Once you have a list, click the name of the new list to add tasks.
         Tasks can be marked as completed by checking the box to the left.
         Click on the task name to edit it. Add as many tasks as you like.
-        The 'X' on the right deletes lists and tasks.
+        The X on the right deletes lists and tasks.
         Click the name of the list again to hide the tasks.
       </p>
       <p>

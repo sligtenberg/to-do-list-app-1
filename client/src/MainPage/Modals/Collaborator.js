@@ -3,6 +3,7 @@ import { UserContext } from "../../Context/user";
 
 function Collaborator({ collaborator, ownedByCurrentUser }) {
   const { deleteCollaborator, updateUserList } = useContext(UserContext)
+  const { user } = useContext(UserContext)
 
   function handleCheckboxClick() {
     fetch(`/user_lists/${collaborator.id}`, {
@@ -27,7 +28,7 @@ function Collaborator({ collaborator, ownedByCurrentUser }) {
     <tr>
       <td><input type='checkbox' disabled={!ownedByCurrentUser} checked={collaborator.owner} onChange={handleCheckboxClick}/></td>
       <td>{collaborator.user.username}</td>
-      {ownedByCurrentUser ? <td><button type='button' onClick={deleteUserList}>remove</button></td> : null }
+      {ownedByCurrentUser || collaborator.user.username === user.username ? <td><button type='button' onClick={deleteUserList}>remove</button></td> : null }
     </tr>
   );
 }

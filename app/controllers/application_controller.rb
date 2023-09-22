@@ -12,8 +12,9 @@ class ApplicationController < ActionController::API
     render json: { errors: ["Log in or sign up to vend!"] }, status: :unauthorized unless @current_user
   end
 
-  def find_owned_list(list_id)
-    @owned_lists.find { |list| list.id == list_id }
+  def list_authorization(list_id)
+    @owned_list = @owned_lists.find { |list| list.id == list_id }
+    render_non_ownership_message unless @owned_list
   end
 
   def render_non_ownership_message
