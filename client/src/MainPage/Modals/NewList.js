@@ -9,7 +9,7 @@ function NewList() {
   const { addNewUserList } = useContext(UserContext)
 
   // handleListSubmit is called when the new list form is submitted
-  function handleListSubmit(e) {
+  function handleNewListSubmit(e) {
     e.preventDefault()
     fetch('/lists', { // send the newListName object in a post request to the server
       method: 'POST',
@@ -17,7 +17,7 @@ function NewList() {
       body: JSON.stringify({name: newListName})
     }).then(rspns => {
       if (rspns.ok) {
-        rspns.json().then(addNewUserList) // update user state to reflect the new list on the frontend
+        rspns.json().then(addNewUserList) // add new user_list (including the new list) to user state
         navigate(-1) // close the modal and navigate back to the lists page
       } else rspns.json().then(rspns => alert(rspns.errors))
     })
@@ -28,7 +28,7 @@ function NewList() {
       className="modalDiv"
       ref={modalRef}
       onClick={e => e.target === modalRef.current ? navigate(-1) : null}>
-      <form onSubmit={handleListSubmit} className="modal">
+      <form onSubmit={handleNewListSubmit} className="modal">
         <h4>New List</h4>
         <input
           autoFocus

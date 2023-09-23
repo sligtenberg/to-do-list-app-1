@@ -26,9 +26,9 @@ function UserProvider({ children }) {
     })})
   }
 
-  // called in List.js
-  function deleteUserList(userListId) {
-    setUser({...user, user_lists: user.user_lists.filter(userList => userList.id !== userListId)})
+  // called in ListHeader.js
+  function deleteList(listId) {
+    setUser({...user, user_lists: user.user_lists.filter(userList => userList.list.id !== listId)})
   }
 
   // called in Task.js
@@ -47,6 +47,7 @@ function UserProvider({ children }) {
     })})
   }
 
+  // called in collaborator
   function updateUserList(updatedUserList) {
     setUser({...user, user_lists: user.user_lists.map(userList => {
       return {...userList, list: {...userList.list, user_lists: userList.list.user_lists
@@ -54,12 +55,13 @@ function UserProvider({ children }) {
     })})
   }
 
-function deleteCollaborator(collaboratorId) {
-  setUser({...user, user_lists: user.user_lists.map(userList => {
-    return {...userList, list: {...userList.list, user_lists: userList.list.user_lists
-      .filter(userList => userList.id !== collaboratorId)}}
-  })})
-}
+  // called in collaborator
+  function deleteCollaborator(collaboratorId) {
+    setUser({...user, user_lists: user.user_lists.map(userList => {
+      return {...userList, list: {...userList.list, user_lists: userList.list.user_lists
+        .filter(userList => userList.id !== collaboratorId)}}
+    })})
+  }
 
   return (
     <UserContext.Provider value={{
@@ -67,7 +69,7 @@ function deleteCollaborator(collaboratorId) {
       setUser,
       addNewUserList,
       addNewTaskToList,
-      deleteUserList,
+      deleteList,
       updateTaskInState,
       removeTaskFromState,
       addNewCollaborator,

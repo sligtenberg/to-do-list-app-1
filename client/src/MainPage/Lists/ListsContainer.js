@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { UserContext } from "../../Context/user";
-import UserList from "./UserList";
+import List from "./List";
 
 function ListsContainer() {
   const { user } = useContext(UserContext)
-  const userLists = user.user_lists.map(userList => <UserList key={userList.id} userList={userList}/>)
+  const lists = user.user_lists.map(userList => <List key={userList.id} userList={userList}/>)
 
-  return userLists;
+  return lists;
 }
 
 export default ListsContainer;

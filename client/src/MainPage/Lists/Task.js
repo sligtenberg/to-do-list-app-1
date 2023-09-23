@@ -1,8 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../Context/user";
 import Foco from 'react-foco';
 
-function UnownedTask({ task }) {
+function Task({ task, owner }) {
   const { updateTaskInState, removeTaskFromState } = useContext(UserContext)
 
   // when editTaskDescription is true, task description becomes a form field that users can edit
@@ -56,11 +56,15 @@ function UnownedTask({ task }) {
         </Foco>
       </form> :
       <div>
-        <input type="checkbox" checked={task.completed} onChange={handleCheckboxClick}/>
-        <span className='hover-pointer' onClick={() => setEditTaskDescription(true)}>{newDescription}</span>
-        <span className="float-right hover-pointer" onClick={deleteTask}>x</span>
+        <input type="checkbox" checked={task.completed} onChange={handleCheckboxClick} disabled={!owner}/>
+        {owner ?
+          <span>
+            <span className='hover-pointer' onClick={() => setEditTaskDescription(true)}>{newDescription}</span>
+            <span className="float-right hover-pointer" onClick={deleteTask}>x</span>
+          </span>
+          : <span>{task.description}</span>}
       </div>
   );
 }
 
-export default UnownedTask;
+export default Task;

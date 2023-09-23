@@ -56,6 +56,10 @@ table {
   margin: 5px;
 }
 
+.expanded-list {
+  margin: 0px 0px 5px;
+}
+
 .modalDiv {
   position: fixed;
   top: 0;
