@@ -48,3 +48,7 @@ end
 
 
 gem "active_model_serializers", "~> 0.10.13"
+
+gem "rspec", "~> 3.12"
+
+gem "require_all", "~> 3.0"

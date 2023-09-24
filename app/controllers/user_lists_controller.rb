@@ -15,6 +15,7 @@ class UserListsController < ApplicationController
     user_list.update!(user_list_params)
   end
 
+  # here we should first check to see if the user_list in question belongs to the current user
   def destroy
     @owned_user_list.destroy
   end

@@ -22,7 +22,8 @@ function List ({ userList }) {
         setExpand={setExpand}
         listName={userList.list.name}
         listId={userList.list.id}
-        owner={owner}/>
+        owner={owner}
+        userListId={userList.id}/>
       {expand ? 
         <div>
           {tasks}

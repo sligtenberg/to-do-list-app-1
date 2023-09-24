@@ -2,13 +2,16 @@ import { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../../Context/user";
 
-function ListHeader({ setExpand, expand, listName, listId, owner }) {
+function ListHeader({ setExpand, expand, listName, listId, userListId, owner }) {
   const location = useLocation()
   const navigate = useNavigate()
-  const { deleteList } = useContext(UserContext)
+  const { deleteList, deleteUserList } = useContext(UserContext)
 
   // function handleLeaveList() {
-  //   // fetch(`/user_lists/${userListId}`)
+  //   fetch(`/user_lists/${userListId}`, {method: 'DELETE'}).then(rspns => {
+  //     if (rspns.ok) deleteUserList(userListId)
+  //     else rspns.json().then(rspns => alert(rspns.errors))
+  //   })
   // }
 
   function handleDeleteList() {

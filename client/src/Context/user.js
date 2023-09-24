@@ -5,19 +5,29 @@ const UserContext = createContext();
 function UserProvider({ children }) {
   const [user, setUser] = useState(null);
 
-  // called in NewList.js
+  // * DIRECT USERLIST ACTIONS *
+  // DELETEUSERLIST - called in ListHeader.js
+  // This function removes a user_list directly from the current user
+  function deleteUserList(userListId) {
+    setUser({...user, user_lists: user.user_lists.filter(userList => userList.id !== userListId)})
+  }
+
+  // NEW USERLIST - called in NewList.js
+  // when a new list is created, the backened creates and returns a new userlist, including the new list
   function addNewUserList(newUserList) {
     setUser({...user, user_lists: [...user.user_lists, newUserList]})
   }
 
-  // called in Collaborators.js
-  function addNewCollaborator(newCollaborator) {
-    setUser({...user, user_lists: user.user_lists.map(userList => {
-      return {...userList, list: {...userList.list, user_lists: [...userList.list.user_lists, newCollaborator]}}
-    })})
+  // * LIST ACTIONS *
+
+  // DELETE LIST - called in ListHeader.js
+  function deleteList(listId) {
+    setUser({...user, user_lists: user.user_lists.filter(userList => userList.list.id !== listId)})
   }
 
-  // called in List.js
+  // * TASK ACTIONS *
+
+  //  NEW TASK - called in List.js
   function addNewTaskToList(newTask, listId) {
     setUser({...user, user_lists: user.user_lists.map(userList => {
       return {...userList, list: userList.list.id === listId ?
@@ -26,12 +36,7 @@ function UserProvider({ children }) {
     })})
   }
 
-  // called in ListHeader.js
-  function deleteList(listId) {
-    setUser({...user, user_lists: user.user_lists.filter(userList => userList.list.id !== listId)})
-  }
-
-  // called in Task.js
+  // UPDATE TASK - called in Task.js
   function updateTaskInState(updatedTask) {
     setUser({...user, user_lists: user.user_lists.map(userList => {
       return {...userList, list: {...userList.list, tasks: userList.list.tasks
@@ -39,7 +44,7 @@ function UserProvider({ children }) {
     })})
   }
 
-  // called in Task.js
+  // DELETE TASK - called in Task.js
   function removeTaskFromState(taskId) {
     setUser({...user, user_lists: user.user_lists.map(userList => {
       return {...userList, list: {...userList.list, tasks: userList.list.tasks
@@ -47,15 +52,23 @@ function UserProvider({ children }) {
     })})
   }
 
-  // called in collaborator
-  function updateUserList(updatedUserList) {
+  // * USERLIST ACTIONS * 
+  // called in Collaborators.js
+  function addNewCollaborator(newCollaborator) {
+    setUser({...user, user_lists: user.user_lists.map(userList => {
+      return {...userList, list: {...userList.list, user_lists: [...userList.list.user_lists, newCollaborator]}}
+    })})
+  }
+
+  // UPDATE USERLIST - called in collaborator
+  function updateCollaborator(updatedUserList) {
     setUser({...user, user_lists: user.user_lists.map(userList => {
       return {...userList, list: {...userList.list, user_lists: userList.list.user_lists
         .map(userList => userList.id === updatedUserList.id ? updatedUserList : userList)}}
     })})
   }
 
-  // called in collaborator
+  // DELETE USERLIST - called in collaborator
   function deleteCollaborator(collaboratorId) {
     setUser({...user, user_lists: user.user_lists.map(userList => {
       return {...userList, list: {...userList.list, user_lists: userList.list.user_lists
@@ -68,12 +81,13 @@ function UserProvider({ children }) {
       user,
       setUser,
       addNewUserList,
+      deleteUserList,
       addNewTaskToList,
       deleteList,
       updateTaskInState,
       removeTaskFromState,
       addNewCollaborator,
-      updateUserList,
+      updateCollaborator,
       deleteCollaborator }}>
       {children}
     </UserContext.Provider>

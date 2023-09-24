@@ -10,8 +10,11 @@ function CollaboratorsContainer() {
   const { user, addNewCollaborator } = useContext(UserContext)
   const userList = user.user_lists.find(userList => userList.list.id === parseInt(id))
 
+  //const owner = true // toggle for dev purposes
+   const owner = userList.owner // toggle for dev purposes
+
   const collaborators = userList.list.user_lists.map(collaborator =>
-    <Collaborator key={collaborator.id} collaborator={collaborator} ownedByCurrentUser={userList.owner}/>)
+    <Collaborator key={collaborator.id} collaborator={collaborator} ownedByCurrentUser={owner}/>)
 
     const blankCollaborator = {
       username: '',
@@ -52,7 +55,7 @@ function CollaboratorsContainer() {
         <form onSubmit={createNewCollaborator}><table><tbody>
           <tr><td>owner</td></tr>
           {collaborators}
-          {userList.owner ? <tr>
+          {owner ? <tr>
             <td><input
               type='checkbox'
               name='owner'

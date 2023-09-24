@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { UserContext } from "../../Context/user";
 
 function Collaborator({ collaborator, ownedByCurrentUser }) {
-  const { deleteCollaborator, updateUserList } = useContext(UserContext)
+  const { deleteCollaborator, updateCollaborator } = useContext(UserContext)
   const { user } = useContext(UserContext)
 
   function handleCheckboxClick() {
@@ -11,7 +11,7 @@ function Collaborator({ collaborator, ownedByCurrentUser }) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({...collaborator, owner: !collaborator.owner})
     }).then(rspns => {
-      if (rspns.ok) rspns.json().then(updateUserList) // update frontend user state
+      if (rspns.ok) rspns.json().then(updateCollaborator) // update frontend user state
       else rspns.json().then(rspns => alert(rspns.errors))
     })
   }
@@ -20,7 +20,7 @@ function Collaborator({ collaborator, ownedByCurrentUser }) {
     // send delete request with collaborator id to the backend 
     fetch(`/user_lists/${collaborator.id}`, {method: 'DELETE'}).then(rspns => {
       if (rspns.ok) deleteCollaborator(collaborator.id) // remove collaborator from frontend
-      else alert('something went wrong') // rspns.json().then(console.log)
+      else rspns.json().then(rspns => alert(rspns.errors)) // rspns.json().then(console.log)
     })
   }
 
