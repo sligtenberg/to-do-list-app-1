@@ -8,7 +8,6 @@ class ApplicationController < ActionController::API
 
   def authorize
     @current_user = User.find_by(id: session[:user_id])
-    #@owned_lists = @current_user.owned_lists
     render json: { errors: ["Log in or sign up to vend!"] }, status: :unauthorized unless @current_user
   end
 
