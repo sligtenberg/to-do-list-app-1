@@ -8,13 +8,12 @@ class ApplicationController < ActionController::API
 
   def authorize
     @current_user = User.find_by(id: session[:user_id])
-    debugger
-    @owned_lists = @current_user.user_lists.select { |user_list| user_list.owner }.map { |user_list| user_list.list }
+    #@owned_lists = @current_user.owned_lists
     render json: { errors: ["Log in or sign up to vend!"] }, status: :unauthorized unless @current_user
   end
 
-  def list_authorization(list_id)
-    @owned_list = @owned_lists.find { |list| list.id == list_id }
+  def find_owned_list(list_id)
+    @owned_list = @current_user.owned_lists.find { |list| list.id == list_id }
     render_non_ownership_message unless @owned_list
   end
 

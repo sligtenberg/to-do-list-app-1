@@ -1,6 +1,6 @@
 import { useContext, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { UserContext } from "../../Context/user";
+import { UserContext } from "../Context/user";
 import Collaborator from "./Collaborator";
 
 function CollaboratorsContainer() {

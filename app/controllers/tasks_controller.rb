@@ -1,8 +1,8 @@
 class TasksController < ApplicationController
 
-  before_action :task_authorization, only: [:update, :destroy]
+  before_action :find_owned_task, only: [:update, :destroy]
   before_action only: :create do
-    list_authorization(task_params[:list_id].to_i)
+    find_owned_list(task_params[:list_id].to_i)
   end
 
   def create
@@ -22,8 +22,8 @@ class TasksController < ApplicationController
 
   private
 
-  def task_authorization
-    @owned_task = @owned_lists.map { |list| list.tasks }.flatten.find { |task| task.id == task_params[:id].to_i }
+  def find_owned_task
+    @owned_task = @current_user.owned_lists.map { |list| list.tasks }.flatten.find { |task| task.id == task_params[:id].to_i }
     render_non_ownership_message unless @owned_task
   end
 

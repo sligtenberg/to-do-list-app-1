@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { UserContext } from "../../Context/user";
+import { UserContext } from "../Context/user";
 
 function Collaborator({ collaborator, ownedByCurrentUser }) {
   const { deleteCollaborator, updateCollaborator } = useContext(UserContext)
@@ -11,7 +11,10 @@ function Collaborator({ collaborator, ownedByCurrentUser }) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({...collaborator, owner: !collaborator.owner})
     }).then(rspns => {
-      if (rspns.ok) rspns.json().then(updateCollaborator) // update frontend user state
+      if (rspns.ok) {
+        //console.log(rspns)
+        rspns.json().then(updateCollaborator) // update frontend user state
+        }
       else rspns.json().then(rspns => alert(rspns.errors))
     })
   }

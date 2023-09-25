@@ -1,5 +1,5 @@
 import { useContext, useRef, useState } from "react";
-import { UserContext } from "../../Context/user";
+import { UserContext } from "../Context/user";
 import { useNavigate } from "react-router-dom";
 
 function NewList() {

@@ -1,8 +1,8 @@
 import { Routes, Route, useLocation, Outlet, useNavigate } from 'react-router-dom';
 import ListsContainer from './Lists/ListsContainer';
 import Instructions from './Instructions';
-import NewList from './Modals/NewList';
-import CollaboratorsContainer from './Modals/CollaboratorsContainer';
+import NewList from '../Modals/NewList';
+import CollaboratorsContainer from '../Modals/CollaboratorsContainer';
 
 function LoggedInMain() {
   const location = useLocation()

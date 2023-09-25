@@ -8,7 +8,7 @@ class User < ApplicationRecord
   validates :username, presence: true
   validates :username, uniqueness: true
 
-  # def owned_lists
-  #   self.user_lists.select { |user_list| user_list.owner }.map { |user_list| user_list.list }
-  # end
+  def owned_lists
+    self.user_lists.select { |user_list| user_list.owner }.map { |user_list| user_list.list }
+  end
 end

@@ -1,7 +1,7 @@
 class ListsController < ApplicationController
 
   before_action only: :destroy do
-    list_authorization(list_params[:id].to_i)
+    find_owned_list(list_params[:id].to_i)
   end
 
   def create
