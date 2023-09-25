@@ -2,5 +2,6 @@ class UserList < ApplicationRecord
   belongs_to :user
   belongs_to :list
 
-  validates :user, uniqueness: { scope: :list }
+  validates_inclusion_of :owner, in: [true, false]
+  validates :list, uniqueness: { scope: :user }
 end
